@@ -1,1 +1,422 @@
+<!--
+  Proiect: FAQ – Siguranța pe Internet (părinți & copii)
+  Fișier: Index.html
+  Versiune: 1.0
+  Comentariu: HTML complet, tema verde, collapsible (details/summary).
+-->
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ – Siguranța pe Internet</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #06120b;
+      --panel: rgba(10, 28, 18, 0.82);
+      --panel2: rgba(12, 34, 22, 0.92);
+      --text: #e9fff1;
+      --muted: rgba(233, 255, 241, 0.78);
+      --border: rgba(140, 255, 192, 0.18);
+      --accent: #22c55e;
+      --shadow: 0 12px 34px rgba(0,0,0,0.38);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.55;
+      background:
+        radial-gradient(1100px 680px at 15% 0%, rgba(34,197,94,0.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,0.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), #030805);
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 26px 16px 70px;
+    }
+
+    header{
+      border: 1px solid var(--border);
+      background: rgba(10,28,18,0.70);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(34,197,94,0.65);
+    }
+
+    h1{
+      margin: 10px 0 6px;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: -0.4px;
+    }
+
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .grid{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .card{
+      border: 1px solid var(--border);
+      background: rgba(10,28,18,0.62);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .cardhead{
+      padding: 16px 16px 8px;
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .title{
+      margin:0;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.1px;
+    }
+
+    .badge{
+      font-size: 12px;
+      color: #05210f;
+      background: linear-gradient(180deg, #59f09a, #22c55e);
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .content{
+      padding: 0 16px 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    details{
+      border-top: 1px solid rgba(140, 255, 192, 0.12);
+      background: rgba(12,34,22,0.35);
+    }
+
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding: 14px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--text);
+      outline:none;
+      user-select:none;
+    }
+
+    summary::-webkit-details-marker{ display:none; }
+
+    .q{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      flex: 1 1 auto;
+    }
+
+    .nr{
+      min-width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(34,197,94,0.16);
+      border: 1px solid rgba(34,197,94,0.35);
+      color: #bfffe0;
+      font-weight: 900;
+      box-shadow: 0 0 18px rgba(34,197,94,0.08) inset;
+      margin-top: 1px;
+    }
+
+    .chev{
+      width: 12px; height: 12px;
+      border-right: 2px solid rgba(233,255,241,0.75);
+      border-bottom: 2px solid rgba(233,255,241,0.75);
+      transform: rotate(45deg);
+      transition: transform .18s ease;
+      margin-top: 7px;
+      flex: 0 0 auto;
+    }
+
+    details[open] summary .chev{
+      transform: rotate(225deg);
+    }
+
+    .answer{
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .answer p{
+      margin: 0;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(34,197,94,0.22);
+      background: rgba(34,197,94,0.08);
+      color: rgba(233,255,241,0.92);
+    }
+
+    footer{
+      margin-top: 16px;
+      text-align:center;
+      font-size: 12px;
+      color: rgba(233,255,241,0.70);
+    }
+
+    .sep{ opacity:0.6; margin: 0 8px; }
+
+    @media (min-width: 860px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="kicker"><span class="dot"></span> FAQ • Siguranța pe Internet</div>
+      <h1>FAQ • Siguranța pe Internet – Întrebări și răspunsuri</h1>
+      <p class="sub">Apasă pe o întrebare pentru a vedea răspunsul.</p>
+    </header>
+
+    <div class="grid">
+      <!-- CARD 1: Q1–Q10 -->
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Set 1</p>
+          <span class="badge">1–10</span>
+        </div>
+        <div class="content">Reguli de bază și situații frecvente (copii & părinți).</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">1</div><div>Ce înseamnă „siguranță pe internet”?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Înseamnă să folosești internetul fără să îți pui viața, datele sau emoțiile în pericol: protejezi informațiile personale, alegi cu grijă cu cine vorbești și ceri ajutor când apare ceva suspect.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">2</div><div>Ce sunt „date personale” și de ce trebuie protejate?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Date personale sunt informații care te pot identifica: nume complet, adresă, școală, număr de telefon, email, fotografii, locație, conturi. Dacă ajung la persoane greșite, pot fi folosite pentru manipulare, șantaj sau furt de cont.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">3</div><div>Ce nu trebuie să trimit niciodată nimănui, nici „în privat”?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Parole, coduri de verificare, poze intime, copie după acte, adresa exactă, programul zilnic, locația în timp real. „În privat” nu înseamnă „în siguranță”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">4</div><div>De ce nu e sigur să vorbești cu necunoscuți online, chiar dacă sunt amabili?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Pentru că pe internet oricine poate pretinde că are altă vârstă sau altă identitate. Un necunoscut poate încerca să câștige încredere ca să obțină informații sau poze.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">5</div><div>Cum recunoști un mesaj periculos sau manipulativ?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Semne tipice: „nu spune nimănui”, „e urgent”, „trimite-mi o poză”, „dă-mi codul”, „altfel pățești ceva”, „îți dau bani/skin-uri”, „te ajut eu”. Presiunea și secretul sunt semnale de alarmă.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">6</div><div>Ce trebuie să facă un copil dacă primește un astfel de mesaj?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Să NU răspundă, să facă o captură de ecran, să blocheze persoana și să arate imediat unui părinte/ adult de încredere. Nu e vina copilului.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">7</div><div>Ce înseamnă „hărțuire online” și cum se simte?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Este când cineva jignește, umilește, amenință sau urmărește repetat un copil pe internet. Se simte ca frică, rușine, stres, evitare, plâns sau dorința de a ascunde telefonul.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">8</div><div>Ce facem dacă apare hărțuire online?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Păstrăm dovezi (capturi), blocăm contul agresorului, raportăm în aplicație, anunțăm școala dacă e cazul și discutăm calm acasă. Nu răspundem cu jigniri: escaladează.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">9</div><div>De ce sunt importante parolele puternice?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>O parolă slabă poate fi ghicită. Odată intrat în cont, cineva poate citi mesaje, posta în numele tău sau cere bani altora.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">10</div><div>Cum arată o parolă bună, pe înțelesul copiilor?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>E lungă și unică. Folosește o frază ușor de ținut minte pentru tine, greu de ghicit pentru alții. Nu folosi numele, data nașterii sau „1234”.</p></div>
+        </details>
+      </section>
+
+      <!-- CARD 2: Q11–Q20 -->
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Set 2</p>
+          <span class="badge">11–20</span>
+        </div>
+        <div class="content">Conturi, aplicații, conținut, semne de alarmă și reguli clare.</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">11</div><div>De ce nu folosim aceeași parolă peste tot?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Dacă un singur cont este spart, atacatorul încearcă aceeași parolă pe alte aplicații. O parolă repetată înseamnă „un singur lacăt pentru toate ușile”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">12</div><div>Ce este un cod de verificare și de ce nu se dă nimănui?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Este un cod primit prin SMS/email pentru intrarea în cont. Cine cere acel cod încearcă, de obicei, să îți fure contul.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">13</div><div>Ce facem când vedem un link sau un fișier suspect?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Nu dăm click. Întrebăm un părinte. Linkurile suspecte promit premii, bani, skin-uri, „verifică aici”, „urgent”, sau vin de la persoane necunoscute.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">14</div><div>Ce înseamnă „setări de confidențialitate” și ce alegem ca regulă?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Înseamnă cine poate vedea profilul, pozele, lista de prieteni și mesajele. Regula sigură: profil privat, mesajele doar de la prieteni, locația oprită, comentariile moderate.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">15</div><div>Ce sunt „permisiunile” unei aplicații și la ce trebuie atenție?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Sunt accesuri cerute de aplicație: cameră, microfon, contacte, locație. Dacă o aplicație cere mai mult decât are nevoie, e suspectă. Exemplu: o lanternă nu are nevoie de contacte.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">16</div><div>Este sigur să postăm poze cu copilul pe internet?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Doar cu grijă. Evităm uniforma cu numele școlii, adresa, locuri frecventate zilnic, poze rușinoase. O fotografie poate rămâne online ani de zile.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">17</div><div>Ce facem dacă un copil a trimis deja ceva ce regretă?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Nu certăm și nu rușinăm. Strângem dovezi, blocăm și raportăm contul, cerem ștergere unde se poate și căutăm sprijin (școală/poliție/servicii). Scopul: protecție, nu vină.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">18</div><div>Cum vorbim despre internet fără frică, dar cu reguli clare?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Stabilim reguli simple și repetabile: „nu date personale”, „nu secret față de părinți”, „dacă te sperie, spui imediat”, „ne oprim și verificăm împreună”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">19</div><div>Care sunt semnele că un copil are o problemă online?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Schimbare bruscă de comportament, evită telefonul sau îl ascunde, devine anxios, nu doarme, scade la școală, refuză să explice, primește multe mesaje noaptea.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">20</div><div>Care e regula de aur pentru copii și părinți?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Dacă ceva te face să te simți speriat, presat sau rușinat, te oprești și ceri ajutor imediat. În familie, copilul nu este pedepsit pentru că a cerut ajutor.</p></div>
+        </details>
+      </section>
+    </div>
+
+    <footer>
+      <span>Versiune: <strong>1.0</strong></span>
+      <span class="sep">•</span>
+      <span>Fișier: <strong>Index.html</strong></span>
+      <span class="sep">•</span>
+      <span>Tema: verde</span>
+    </footer>
+  </div>
+</body>
+</html>
 
