@@ -1,1 +1,420 @@
+<!--
+  Proiect: FAQ – Programarea la copii
+  Fișier: Index.html
+  Versiune: 1.0
+  Comentariu: HTML complet, tema verde, collapsible (details/summary). Include 3–5 (screen-free), 7–8 ScratchJr, 9–11 Scratch, 11–13 Python, 14–18 STEM/Robotică/Controllere.
+-->
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ – Programarea la copii</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #06120b;
+      --text: #e9fff1;
+      --muted: rgba(233, 255, 241, 0.78);
+      --border: rgba(140, 255, 192, 0.18);
+      --accent: #22c55e;
+      --shadow: 0 12px 34px rgba(0,0,0,0.38);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.55;
+      background:
+        radial-gradient(1100px 680px at 15% 0%, rgba(34,197,94,0.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,0.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), #030805);
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 26px 16px 70px;
+    }
+
+    header{
+      border: 1px solid var(--border);
+      background: rgba(10,28,18,0.70);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(34,197,94,0.65);
+    }
+
+    h1{
+      margin: 10px 0 6px;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: -0.4px;
+    }
+
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .grid{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .card{
+      border: 1px solid var(--border);
+      background: rgba(10,28,18,0.62);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .cardhead{
+      padding: 16px 16px 8px;
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .title{
+      margin:0;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.1px;
+    }
+
+    .badge{
+      font-size: 12px;
+      color: #05210f;
+      background: linear-gradient(180deg, #59f09a, #22c55e);
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .content{
+      padding: 0 16px 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    details{
+      border-top: 1px solid rgba(140, 255, 192, 0.12);
+      background: rgba(12,34,22,0.35);
+    }
+
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding: 14px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--text);
+      outline:none;
+      user-select:none;
+    }
+
+    summary::-webkit-details-marker{ display:none; }
+
+    .q{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      flex: 1 1 auto;
+    }
+
+    .nr{
+      min-width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(34,197,94,0.16);
+      border: 1px solid rgba(34,197,94,0.35);
+      color: #bfffe0;
+      font-weight: 900;
+      box-shadow: 0 0 18px rgba(34,197,94,0.08) inset;
+      margin-top: 1px;
+    }
+
+    .chev{
+      width: 12px; height: 12px;
+      border-right: 2px solid rgba(233,255,241,0.75);
+      border-bottom: 2px solid rgba(233,255,241,0.75);
+      transform: rotate(45deg);
+      transition: transform .18s ease;
+      margin-top: 7px;
+      flex: 0 0 auto;
+    }
+
+    details[open] summary .chev{
+      transform: rotate(225deg);
+    }
+
+    .answer{
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .answer p{
+      margin: 0;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(34,197,94,0.22);
+      background: rgba(34,197,94,0.08);
+      color: rgba(233,255,241,0.92);
+    }
+
+    footer{
+      margin-top: 16px;
+      text-align:center;
+      font-size: 12px;
+      color: rgba(233,255,241,0.70);
+    }
+
+    .sep{ opacity:0.6; margin: 0 8px; }
+
+    @media (min-width: 860px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="kicker"><span class="dot"></span> FAQ • Programarea la copii</div>
+      <h1>FAQ • Programarea la copii – Întrebări și răspunsuri</h1>
+      <p class="sub">Apasă pe o întrebare pentru a vedea răspunsul.</p>
+    </header>
+
+    <div class="grid">
+      <!-- CARD 1 -->
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Etape 3–11 ani</p>
+          <span class="badge">1–10</span>
+        </div>
+        <div class="content">3–5 fără ecran, 7–8 ScratchJr, 9–11 Scratch. 🧠🧩</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">1</div><div>De ce vorbim despre programare la copii? 🧠</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Programarea ordonează gândirea: copilul învață să gândească pas cu pas, să ia decizii și să verifice rezultatul. Nu este despre ecrane, ci despre structură mentală.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">2</div><div>La 3–5 ani, ce facem concret? 👶🚫📱</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Activități fără ecran: jocuri cu pași, reguli simple, trasee, sortări, povești ordonate. Copilul învață „mai întâi… apoi…”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">3</div><div>De ce fără ecran la 3–5 ani? 🚫</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Pentru că în această etapă atenția, limbajul și controlul emoțiilor se dezvoltă mai bine prin joc real, mișcare și comunicare directă.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">4</div><div>La 6–7 ani, ce exersăm? ✏️</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Gândire algoritmică fără cod: pași explicați verbal, reguli „dacă… atunci…”, labirinturi pe hârtie, scheme cu săgeți. Scopul este înțelegerea, nu viteza.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">5</div><div>De ce e importantă etapa 6–7 ani? ⚠️</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Pentru că aici se ordonează gândirea verbală. Dacă etapa e sărită, copilul poate ajunge să execute fără să înțeleagă.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">6</div><div>De ce ScratchJr la 7–8 ani? 🎨</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>ScratchJr folosește blocuri foarte simple și nu cere cod scris. Este o introducere controlată pe ecran, cu accent pe pași și repetiții simple.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">7</div><div>Ce proiecte sunt potrivite în ScratchJr? 🧱</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Animații scurte și povești interactive: personajul se mișcă, repetă, începe și se oprește. Copilul trebuie să explice ce a făcut și de ce.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">8</div><div>De ce Scratch la 9–11 ani? 🧩🧠</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Scratch oferă programare vizuală completă: decizii, repetări, variabile (scor, timp), testare și corectare. E etapa în care copilul poate construi proiecte mai coerente.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">9</div><div>Ce învață copilul în Scratch? 🛠️</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Planificare, reguli, repetare, scor/variabile, verificare și corectare. Beneficiul major: copilul învață să gândească înainte de a acționa.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">10</div><div>Care e regula generală pentru primele etape? ✅</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Copilul trebuie să poată explica pașii și de ce funcționează. Dacă nu poate explica, înseamnă că etapa trebuie repetată, nu grăbită.</p></div>
+        </details>
+      </section>
+
+      <!-- CARD 2 -->
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Etape 11–18 ani</p>
+          <span class="badge">11–20</span>
+        </div>
+        <div class="content">Python + proiecte reale: STEM, robotică, controllere. 🤖🔬</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">11</div><div>De ce trecem la Python la 11–13 ani? 🧾</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Python cere precizie și rigoare: nu mai merge „aproximativ corect”. Ajută la formarea atenției la detalii și a gândirii exacte.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">12</div><div>Cu ce începe copilul în Python? 🐍</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Citire și afișare, condiții, repetări, exerciții scurte și clare. Scopul este logica și verificarea rezultatului.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">13</div><div>Ce se schimbă la 14–18 ani? 🎓</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Programarea devine instrument de lucru pentru proiecte reale. Elevul poate planifica pe termen mai lung, lega concepte din domenii diferite și gestiona complexitatea.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">14</div><div>Ce înseamnă programare la 14–18 ani? 🧠</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Înseamnă să folosești programarea pentru a rezolva probleme reale: control de sisteme, analiză de date, automatizări și proiecte interdisciplinare.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">15</div><div>Ce înseamnă STEM în practică? 🔬⚙️</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Programarea devine limbaj comun între matematică, fizică, tehnologie și inginerie. O problemă reală folosește mai multe discipline, nu una singură.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">16</div><div>Ce sunt controllerele? 🔌</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Sunt „creierul” unui sistem fizic: plăci care citesc senzori și controlează actuatori (motoare, lumini, sunete). Ele leagă codul de lumea reală.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">17</div><div>De ce robotică la 14–18 ani? 🤖</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Pentru că rezultatul se vede imediat: dacă logica e greșită, robotul nu face ce trebuie. Asta dezvoltă rigoare, testare și responsabilitate.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">18</div><div>Ce proiecte sunt potrivite în robotică? 🧪</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Roboți care evită obstacole, măsurători cu senzori (lumină, distanță, temperatură), sisteme automate simple. Accent pe proces și verificare, nu pe „spectacol”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">19</div><div>Ce înseamnă transdisciplinaritate? 🔗</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Înseamnă să aplici matematică în cod, fizică în mișcare, să documentezi rezultate și să explici decizii. Programarea devine unealtă de gândire, nu scop.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">20</div><div>Care este concluzia pentru 14–18 ani? 🎯</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Scopul este formarea unui tânăr care gândește structurat, leagă domenii diferite, construiește soluții reale și poate explica ce face și de ce.</p></div>
+        </details>
+      </section>
+    </div>
+
+    <footer>
+      <span>Versiune: <strong>1.0</strong></span>
+      <span class="sep">•</span>
+      <span>Fișier: <strong>Index.html</strong></span>
+      <span class="sep">•</span>
+      <span>Tema: verde</span>
+    </footer>
+  </div>
+</body>
+</html>
 
