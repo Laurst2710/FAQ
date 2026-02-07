@@ -1,36 +1,33 @@
 <!--
-  Proiect: 25 Întrebări despre Inteligența Artificială
-  Fișier: index.html
+  Proiect: FAQ – Inteligența Artificială (fără termeni tehnici)
+  Fișier: Index.html
   Versiune: 1.0
-  Notă (managementul configurației): La fiecare modificare, crește versiunea (1.1, 1.2, ...).
+  Observație (managementul configurației): Orice modificare => versiune 1.1, 1.2, ...
 -->
 <!DOCTYPE html>
 <html lang="ro">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>25 Întrebări despre Inteligența Artificială</title>
+  <title>FAQ – Inteligența Artificială</title>
 
-  <!-- Font "cunoscut": Inter (Google Fonts) -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /*
-      Tema: Verde (modernă, clară, ușor de citit pe GitHub Pages)
-      Construcție: carduri + accordion (details/summary)
-    */
+    /* Tema verde – GitHub Pages friendly (fără biblioteci externe) */
     :root{
-      --bg: #07140d;         /* fundal foarte închis, verde-negru */
-      --panel: #0c1f14;      /* panouri */
-      --panel2: #0f2a1a;     /* panouri hover */
-      --text: #e7fff0;       /* text principal */
-      --muted: #b7e7c6;      /* text secundar */
+      --bg: #06120b;
+      --panel: rgba(10, 28, 18, 0.82);
+      --panel2: rgba(12, 34, 22, 0.92);
+      --text: #e9fff1;
+      --muted: rgba(233, 255, 241, 0.78);
       --border: rgba(140, 255, 192, 0.18);
-      --accent: #22c55e;     /* verde */
-      --accent2:#16a34a;     /* verde mai închis */
-      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --accent: #22c55e;
+      --accent2:#16a34a;
+      --shadow: 0 12px 34px rgba(0,0,0,0.38);
       --radius: 18px;
     }
 
@@ -38,37 +35,37 @@
     body{
       margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(1200px 700px at 15% 0%, rgba(34,197,94,0.18), transparent 60%),
-        radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,0.12), transparent 55%),
-        linear-gradient(180deg, var(--bg), #040b07);
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.55;
+      background:
+        radial-gradient(1100px 680px at 15% 0%, rgba(34,197,94,0.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,0.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), #030805);
     }
 
     .wrap{
       max-width: 980px;
       margin: 0 auto;
-      padding: 28px 16px 60px;
+      padding: 26px 16px 70px;
     }
 
     header{
       border: 1px solid var(--border);
-      background: rgba(12,31,20,0.75);
-      box-shadow: var(--shadow);
+      background: rgba(10,28,18,0.70);
       border-radius: var(--radius);
+      box-shadow: var(--shadow);
       padding: 20px 18px;
       backdrop-filter: blur(8px);
     }
 
     .kicker{
-      display:inline-flex;
-      gap:10px;
+      display:flex;
       align-items:center;
-      font-weight: 700;
+      gap:10px;
+      font-weight: 800;
       letter-spacing: 0.2px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
       text-transform: uppercase;
     }
 
@@ -92,18 +89,18 @@
     }
 
     .grid{
-      margin-top: 18px;
-      display: grid;
+      margin-top: 16px;
+      display:grid;
       grid-template-columns: 1fr;
       gap: 14px;
     }
 
     .card{
       border: 1px solid var(--border);
-      background: rgba(12,31,20,0.62);
+      background: rgba(10,28,18,0.62);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow: hidden;
+      overflow:hidden;
     }
 
     .cardhead{
@@ -117,18 +114,18 @@
     .title{
       margin:0;
       font-size: 16px;
-      color: var(--text);
-      font-weight: 800;
+      font-weight: 900;
+      letter-spacing: 0.1px;
     }
 
     .badge{
       font-size: 12px;
       color: #05210f;
       background: linear-gradient(180deg, #59f09a, #22c55e);
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.14);
       padding: 6px 10px;
       border-radius: 999px;
-      font-weight: 800;
+      font-weight: 900;
       white-space: nowrap;
     }
 
@@ -140,28 +137,30 @@
 
     details{
       border-top: 1px solid rgba(140, 255, 192, 0.12);
-      background: rgba(15,42,26,0.35);
+      background: rgba(12,34,22,0.35);
     }
 
     summary{
-      cursor: pointer;
-      list-style: none;
+      cursor:pointer;
+      list-style:none;
       padding: 14px 16px;
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       justify-content: space-between;
-      gap: 10px;
-      font-weight: 700;
+      gap: 12px;
+      font-weight: 800;
       color: var(--text);
-      outline: none;
+      outline:none;
+      user-select:none;
     }
 
-    summary::-webkit-details-marker { display: none; }
+    summary::-webkit-details-marker{ display:none; }
 
     .q{
       display:flex;
       gap: 10px;
       align-items:flex-start;
+      flex: 1 1 auto;
     }
 
     .nr{
@@ -176,15 +175,16 @@
       color: #bfffe0;
       font-weight: 900;
       box-shadow: 0 0 18px rgba(34,197,94,0.08) inset;
+      margin-top: 1px;
     }
 
     .chev{
       width: 12px; height: 12px;
-      border-right: 2px solid rgba(183,231,198,0.9);
-      border-bottom: 2px solid rgba(183,231,198,0.9);
+      border-right: 2px solid rgba(233,255,241,0.75);
+      border-bottom: 2px solid rgba(233,255,241,0.75);
       transform: rotate(45deg);
       transition: transform .18s ease;
-      margin-top: 2px;
+      margin-top: 7px;
       flex: 0 0 auto;
     }
 
@@ -192,29 +192,29 @@
       transform: rotate(225deg);
     }
 
-    .answerBox{
+    .answer{
       padding: 0 16px 16px;
       color: var(--muted);
       font-size: 14px;
     }
 
-    .hint{
+    .answer p{
       margin: 0;
       padding: 12px 12px;
       border-radius: 14px;
-      border: 1px dashed rgba(34,197,94,0.35);
+      border: 1px solid rgba(34,197,94,0.22);
       background: rgba(34,197,94,0.08);
-      color: #d7ffe8;
+      color: rgba(233,255,241,0.92);
     }
 
     footer{
-      margin-top: 18px;
-      color: rgba(183,231,198,0.85);
-      font-size: 12px;
+      margin-top: 16px;
       text-align:center;
+      font-size: 12px;
+      color: rgba(233,255,241,0.70);
     }
 
-    .sep{ opacity: 0.6; margin: 0 8px; }
+    .sep{ opacity:0.6; margin: 0 8px; }
 
     @media (min-width: 860px){
       .grid{ grid-template-columns: 1fr 1fr; }
@@ -225,233 +225,187 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="kicker"><span class="dot"></span> Inteligență Artificială • Set de întrebări</div>
-      <h1>25 întrebări despre AI (pentru discuție și verificare)</h1>
-      <p class="sub">Deschide fiecare întrebare. Poți completa răspunsurile ca exercițiu (sunt intenționat fără soluții).</p>
+      <div class="kicker"><span class="dot"></span> FAQ • Inteligența Artificială</div>
+      <h1>Întrebări și răspunsuri (fără termeni tehnici)</h1>
+      <p class="sub">Apasă pe fiecare întrebare pentru a vedea răspunsul.</p>
     </header>
 
     <div class="grid">
+      <!-- CARD 1: Q1–Q10 -->
       <section class="card">
         <div class="cardhead">
-          <p class="title">Fundamente</p>
-          <span class="badge">Q1–Q9</span>
+          <p class="title">Set 1</p>
+          <span class="badge">1–10</span>
         </div>
-        <div class="content">Concepte de bază: definiții, date, modele, evaluare.</div>
+        <div class="content">Definiții simple și idei de bază.</div>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">1</div><div>Ce este inteligența artificială (AI) și cum diferă de programarea clasică?</div></div>
+            <div class="q"><div class="nr">1</div><div>Ce este inteligența artificială?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Scrie în 2–4 idei: “reguli scrise de om” vs “model învățat din date”.</p></div>
+          <div class="answer"><p>Inteligența artificială este o tehnologie care permite calculatoarelor să rezolve sarcini precum recunoașterea imaginilor, înțelegerea textului sau luarea unor decizii simple.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">2</div><div>Ce înseamnă „machine learning” și de ce este considerat o subramură a AI?</div></div>
+            <div class="q"><div class="nr">2</div><div>Inteligența artificială gândește ca un om?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Include ideea de „învățare din exemple” și „generalizare”.</p></div>
+          <div class="answer"><p>Nu. Ea nu gândește, nu înțelege și nu are conștiință. Execută calcule pe baza datelor primite.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">3</div><div>Care este diferența dintre învățare supervizată, nesupervizată și prin întărire?</div></div>
+            <div class="q"><div class="nr">3</div><div>Cum „învață” inteligența artificială?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Compară: etichete, grupare/structură, recompensă.</p></div>
+          <div class="answer"><p>Învață analizând foarte multe exemple și observând tipare, nu prin explicații sau raționament uman.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">4</div><div>Ce sunt „datele de antrenare”, „datele de validare” și „datele de test” și de ce le separăm?</div></div>
+            <div class="q"><div class="nr">4</div><div>Inteligența artificială poate face greșeli?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Menționează prevenirea supraînvățării (overfitting) și evaluarea corectă.</p></div>
+          <div class="answer"><p>Da. Poate produce rezultate incorecte dacă datele sunt greșite sau incomplete.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">5</div><div>Ce este o „caracteristică” (feature) într-un set de date și cum influențează performanța unui model?</div></div>
+            <div class="q"><div class="nr">5</div><div>De unde își ia informațiile un sistem AI?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Dă un exemplu: vârstă, temperatură, număr de clicuri etc.</p></div>
+          <div class="answer"><p>Din datele pe care le-a analizat anterior sau din surse puse la dispoziție de oameni.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">6</div><div>Ce înseamnă „overfitting” și „underfitting”? Dă câte un semn pentru fiecare.</div></div>
+            <div class="q"><div class="nr">6</div><div>Inteligența artificială poate înțelege sensul unui text?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Leagă de: performanță bună pe train vs slabă pe test.</p></div>
+          <div class="answer"><p>Nu în sens uman. Ea recunoaște tipare de cuvinte și structuri, nu semnificații reale.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">7</div><div>Ce este o matrice de confuzie și la ce folosește în clasificare?</div></div>
+            <div class="q"><div class="nr">7</div><div>AI poate lua decizii singură?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Amintește: true/false positives/negatives.</p></div>
+          <div class="answer"><p>Poate lua decizii automate în limite stabilite de oameni, dar nu decide scopuri sau valori.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">8</div><div>Ce metrici sunt utile la clasificare (accuracy, precision, recall, F1) și când poate „accuracy” să fie înșelătoare?</div></div>
+            <div class="q"><div class="nr">8</div><div>Inteligența artificială poate fi creativă?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Caz tipic: clase dezechilibrate (imbalance).</p></div>
+          <div class="answer"><p>Poate combina informații existente în moduri noi, dar nu are imaginație sau intenție.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">9</div><div>Ce este „bias” în date sau în model și de ce poate produce rezultate nedrepte?</div></div>
+            <div class="q"><div class="nr">9</div><div>AI este întotdeauna corectă?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Leagă de reprezentare insuficientă / eșantionare.</p></div>
+          <div class="answer"><p>Nu. Răspunsurile trebuie verificate, mai ales în domenii importante.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">10</div><div>AI poate înlocui inteligența umană?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Nu. Poate ajuta oamenii, dar nu îi poate înlocui complet.</p></div>
         </details>
       </section>
 
+      <!-- CARD 2: Q11–Q20 -->
       <section class="card">
         <div class="cardhead">
-          <p class="title">Modele & Tehnici</p>
-          <span class="badge">Q10–Q18</span>
+          <p class="title">Set 2</p>
+          <span class="badge">11–20</span>
         </div>
-        <div class="content">Rețele neuronale, NLP, viziune, modele generative.</div>
+        <div class="content">Limite, responsabilitate și utilizare corectă.</div>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">10</div><div>Ce este o rețea neuronală și ce înseamnă un „parametru” (weight) într-un astfel de model?</div></div>
+            <div class="q"><div class="nr">11</div><div>Inteligența artificială știe ce este adevărat și ce este fals?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Descrie ideea de strat (layer) și ajustare prin învățare.</p></div>
+          <div class="answer"><p>Nu. Ea generează răspunsuri pe baza probabilităților, nu verifică adevărul.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">11</div><div>Ce este funcția de activare și de ce nu este suficientă o rețea doar cu operații liniare?</div></div>
+            <div class="q"><div class="nr">12</div><div>De ce uneori AI spune lucruri greșite, dar convingătoare?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Cuvânt-cheie: nelinearitate.</p></div>
+          <div class="answer"><p>Pentru că produce texte care „sună bine”, chiar dacă informația nu este corectă.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">12</div><div>Ce înseamnă „gradient descent” și care este rolul ratei de învățare (learning rate)?</div></div>
+            <div class="q"><div class="nr">13</div><div>Cine este responsabil pentru deciziile luate cu ajutorul AI?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Menționează: pași prea mari vs prea mici.</p></div>
+          <div class="answer"><p>Oamenii care o folosesc sau o implementează, nu sistemul în sine.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">13</div><div>Ce este un „transformer” (în NLP) și de ce a devenit atât de important?</div></div>
+            <div class="q"><div class="nr">14</div><div>Inteligența artificială poate fi părtinitoare?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Cuvânt-cheie: atenție (attention) și paralelizare.</p></div>
+          <div class="answer"><p>Da. Dacă datele analizate sunt dezechilibrate, rezultatele pot fi nedrepte.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">14</div><div>Ce sunt „tokenii” într-un model de limbaj și cum influențează costul/limitele de context?</div></div>
+            <div class="q"><div class="nr">15</div><div>AI poate învăța lucruri noi singură?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Leagă de: împărțirea textului și fereastra de context.</p></div>
+          <div class="answer"><p>Nu complet. Are nevoie de date și reguli stabilite de oameni.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">15</div><div>Ce înseamnă „fine-tuning” și când e preferabil față de „prompting”?</div></div>
+            <div class="q"><div class="nr">16</div><div>Inteligența artificială poate înlocui profesorii?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Compară: personalizare persistentă vs instrucțiuni în prompt.</p></div>
+          <div class="answer"><p>Nu. Poate fi un instrument de sprijin, dar nu poate înlocui rolul uman.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">16</div><div>Ce este „RAG” (Retrieval-Augmented Generation) și ce problemă încearcă să reducă?</div></div>
+            <div class="q"><div class="nr">17</div><div>AI poate lua decizii morale?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Cuvinte-cheie: căutare în documente + generare; halucinații.</p></div>
+          <div class="answer"><p>Nu. Nu înțelege binele, răul sau responsabilitatea.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">17</div><div>Care este diferența dintre un model discriminativ și unul generativ?</div></div>
+            <div class="q"><div class="nr">18</div><div>Inteligența artificială este periculoasă?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Discriminativ: decide/clasifică; Generativ: poate produce date similare.</p></div>
+          <div class="answer"><p>Nu prin ea însăși. Devine periculoasă doar dacă este folosită greșit.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">18</div><div>Ce este „difuzia” (diffusion) în generarea de imagini și ce rol au pașii iterativi?</div></div>
+            <div class="q"><div class="nr">19</div><div>De ce trebuie verificate rezultatele oferite de AI?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Leagă de: zgomot → imagine prin denoising repetat.</p></div>
-        </details>
-      </section>
-
-      <section class="card">
-        <div class="cardhead">
-          <p class="title">Etică, Siguranță, Societate</p>
-          <span class="badge">Q19–Q25</span>
-        </div>
-        <div class="content">Impact, responsabilitate, confidențialitate, riscuri.</div>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">19</div><div>Ce este „explainability” (explicabilitatea) și de ce contează în domenii precum sănătate sau justiție?</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answerBox"><p class="hint">Idee: decizii verificabile, încredere, audit.</p></div>
+          <div class="answer"><p>Pentru că poate produce informații greșite sau incomplete.</p></div>
         </details>
 
         <details>
           <summary>
-            <div class="q"><div class="nr">20</div><div>Ce riscuri apar când un model „halucinează” și cum poate fi redusă problema în practică?</div></div>
+            <div class="q"><div class="nr">20</div><div>Care este rolul principal al inteligenței artificiale?</div></div>
             <span class="chev" aria-hidden="true"></span>
           </summary>
-          <div class="answerBox"><p class="hint">Menționează: citare surse, RAG, verificare umană, constrângeri.</p></div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">21</div><div>Ce înseamnă „privacy” în AI și ce este diferența dintre anonimizare și pseudonimizare?</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answerBox"><p class="hint">Fii concret: ce se poate reidentifica și ce nu.</p></div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">22</div><div>Ce este „data leakage” și de ce poate face un model să pară mai bun decât este?</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answerBox"><p class="hint">Exemplu: informații din test ajung în train.</p></div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">23</div><div>Cum poate AI să amplifice dezinformarea și ce contramăsuri există?</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answerBox"><p class="hint">Amintește: watermarking, verificare surse, educație media.</p></div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">24</div><div>Ce înseamnă „alignment” (alinierea) unui model și de ce e dificilă?</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answerBox"><p class="hint">Idee: valori/obiective umane, interpretare, context.</p></div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">25</div><div>În ce domenii vezi cel mai mare impact pozitiv al AI în următorii 5 ani și care sunt două riscuri majore?</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answerBox"><p class="hint">Răspuns scurt: 3 domenii + 2 riscuri (ex.: piața muncii, confidențialitate).</p></div>
+          <div class="answer"><p>Să ajute oamenii să lucreze mai rapid și mai eficient, nu să îi înlocuiască.</p></div>
         </details>
       </section>
     </div>
@@ -459,11 +413,10 @@
     <footer>
       <span>Versiune: <strong>1.0</strong></span>
       <span class="sep">•</span>
-      <span>Fișier unic pentru GitHub Pages: <strong>index.html</strong></span>
+      <span>Fișier: <strong>Index.html</strong></span>
       <span class="sep">•</span>
       <span>Tema: verde</span>
     </footer>
   </div>
 </body>
 </html>
-
