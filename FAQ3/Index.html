@@ -1,1 +1,422 @@
+<!--
+  Proiect: FAQ – Gândire Computațională / Algoritmică
+  Fișier: Index.html
+  Versiune: 1.0
+  Comentariu: HTML complet, tema verde, collapsible (details/summary). FAQ3.
+-->
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ – Gândire Computațională</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #06120b;
+      --panel: rgba(10, 28, 18, 0.82);
+      --panel2: rgba(12, 34, 22, 0.92);
+      --text: #e9fff1;
+      --muted: rgba(233, 255, 241, 0.78);
+      --border: rgba(140, 255, 192, 0.18);
+      --accent: #22c55e;
+      --shadow: 0 12px 34px rgba(0,0,0,0.38);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.55;
+      background:
+        radial-gradient(1100px 680px at 15% 0%, rgba(34,197,94,0.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,0.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), #030805);
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 26px 16px 70px;
+    }
+
+    header{
+      border: 1px solid var(--border);
+      background: rgba(10,28,18,0.70);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(34,197,94,0.65);
+    }
+
+    h1{
+      margin: 10px 0 6px;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: -0.4px;
+    }
+
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .grid{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .card{
+      border: 1px solid var(--border);
+      background: rgba(10,28,18,0.62);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .cardhead{
+      padding: 16px 16px 8px;
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .title{
+      margin:0;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.1px;
+    }
+
+    .badge{
+      font-size: 12px;
+      color: #05210f;
+      background: linear-gradient(180deg, #59f09a, #22c55e);
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .content{
+      padding: 0 16px 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    details{
+      border-top: 1px solid rgba(140, 255, 192, 0.12);
+      background: rgba(12,34,22,0.35);
+    }
+
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding: 14px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--text);
+      outline:none;
+      user-select:none;
+    }
+
+    summary::-webkit-details-marker{ display:none; }
+
+    .q{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      flex: 1 1 auto;
+    }
+
+    .nr{
+      min-width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(34,197,94,0.16);
+      border: 1px solid rgba(34,197,94,0.35);
+      color: #bfffe0;
+      font-weight: 900;
+      box-shadow: 0 0 18px rgba(34,197,94,0.08) inset;
+      margin-top: 1px;
+    }
+
+    .chev{
+      width: 12px; height: 12px;
+      border-right: 2px solid rgba(233,255,241,0.75);
+      border-bottom: 2px solid rgba(233,255,241,0.75);
+      transform: rotate(45deg);
+      transition: transform .18s ease;
+      margin-top: 7px;
+      flex: 0 0 auto;
+    }
+
+    details[open] summary .chev{
+      transform: rotate(225deg);
+    }
+
+    .answer{
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .answer p{
+      margin: 0;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(34,197,94,0.22);
+      background: rgba(34,197,94,0.08);
+      color: rgba(233,255,241,0.92);
+    }
+
+    footer{
+      margin-top: 16px;
+      text-align:center;
+      font-size: 12px;
+      color: rgba(233,255,241,0.70);
+    }
+
+    .sep{ opacity:0.6; margin: 0 8px; }
+
+    @media (min-width: 860px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="kicker"><span class="dot"></span> FAQ • Gândire Computațională</div>
+      <h1>FAQ • Gândire Computațională / Algoritmică – Întrebări și răspunsuri</h1>
+      <p class="sub">Apasă pe o întrebare pentru a vedea răspunsul.</p>
+    </header>
+
+    <div class="grid">
+      <!-- CARD 1: Q1–Q10 -->
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Set 1</p>
+          <span class="badge">1–10</span>
+        </div>
+        <div class="content">Idei de bază: algoritm, pași, decizii, repetări, verificare.</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">1</div><div>Ce este gândirea computațională?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Este modul de a rezolva probleme organizând soluția în pași clari: înțelegi cerința, alegi datele, scrii pașii, verifici rezultatul și corectezi dacă e nevoie.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">2</div><div>Ce este un algoritm?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Un algoritm este o listă de pași, în ordine, care duce sigur la rezolvarea unei probleme, la fel ca o rețetă de gătit.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">3</div><div>De ce trebuie ca pașii să fie clari și în ordine?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Pentru că un calculator execută exact ce îi spui. Dacă pașii sunt neclari sau amestecați, soluția poate deveni greșită sau imposibil de urmărit.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">4</div><div>Ce înseamnă „intrare” și „ieșire” într-o problemă?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Intrarea sunt datele pe care le primești (de exemplu, un număr). Ieșirea este rezultatul pe care trebuie să-l afișezi (de exemplu, suma).</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">5</div><div>Ce este o variabilă, pe înțelesul elevilor?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>O variabilă este o „cutie” cu un nume, în care păstrezi o valoare (număr sau text), ca să o folosești mai târziu în pașii algoritmului.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">6</div><div>Când folosim o decizie (Dacă / Altfel)?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Folosim o decizie când există două (sau mai multe) situații posibile. De exemplu: „Dacă numărul este par, afișează X, altfel afișează Y”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">7</div><div>Când folosim repetarea (bucla)?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Folosim repetarea când trebuie să facem același lucru de mai multe ori: să adunăm termeni, să numărăm, să parcurgem elemente, să citim mai multe valori.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">8</div><div>Ce este un „pas de verificare” și de ce contează?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Este momentul în care verifici dacă rezultatul are sens. Folosești exemple simple, calcule manual și te asiguri că algoritmul funcționează în cazuri diferite.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">9</div><div>Ce înseamnă să „împarți problema” în părți?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Înseamnă să separi o problemă mare în pași mici: ce citesc, ce calculez, ce repet, ce afișez. Așa scazi șansele de greșeală.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">10</div><div>Ce este o schemă logică (flowchart)?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Este un desen al algoritmului cu forme și săgeți: începe, citește, calculează, decide, repetă, afișează. Ajută să vezi clar ordinea pașilor.</p></div>
+        </details>
+      </section>
+
+      <!-- CARD 2: Q11–Q20 -->
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Set 2</p>
+          <span class="badge">11–20</span>
+        </div>
+        <div class="content">Calitate: corectitudine, testare, cazuri speciale, eficiență și claritate.</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">11</div><div>Ce înseamnă un „caz de test”?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Un caz de test este un exemplu de intrare pentru care știi (sau calculezi) rezultatul corect, ca să verifici dacă programul produce același rezultat.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">12</div><div>De ce testăm cu exemple mici înainte de exemple mari?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Pentru că la exemple mici poți verifica ușor manual și vezi imediat unde ai greșit. Apoi treci la exemple mari pentru siguranță.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">13</div><div>Ce sunt „cazurile speciale” într-o problemă?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Sunt situații la limită: intrare minimă, intrare maximă, valori egale, lipsa unor elemente. Dacă nu le tratezi, programul poate da rezultat greșit.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">14</div><div>De ce contează numele variabilelor?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Fiindcă un nume bun explică rolul variabilei. „sumaTotala” este mai clar decât „s”. Claritatea scade erorile și face programul ușor de citit.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">15</div><div>Ce înseamnă „program corect”?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Înseamnă că pentru orice intrare permisă de problemă, programul produce rezultatul corect și respectă cerința exactă de afișare.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">16</div><div>Ce înseamnă „program eficient” pe înțelesul elevilor?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Înseamnă să termine repede și să nu folosească pași inutili, mai ales când datele sunt multe.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">17</div><div>De ce un algoritm poate avea mai multe soluții corecte?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Pentru că poți ajunge la același rezultat prin pași diferiți. Important este să fie corect, clar și să respecte restricțiile problemei.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">18</div><div>Ce înseamnă „ordine corectă” într-o soluție?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Înseamnă să ceri datele înainte să le folosești, să inițializezi variabilele înainte de calcule și să afișezi rezultatul doar după ce este calculat.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">19</div><div>De ce este util să scriem pseudocod înainte de program?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Pentru că pseudocodul te ajută să fixezi logica fără să te blochezi în detalii de limbaj. După aceea, transformi pașii în cod.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">20</div><div>Care este regula simplă pentru a evita greșelile la început?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Scrie pașii pe hârtie: Intrare → Inițializare → Repetare/Decizie → Calcul → Afișare, apoi testează cu 2–3 exemple pe care le poți verifica manual.</p></div>
+        </details>
+      </section>
+    </div>
+
+    <footer>
+      <span>Versiune: <strong>1.0</strong></span>
+      <span class="sep">•</span>
+      <span>Fișier: <strong>Index.html</strong></span>
+      <span class="sep">•</span>
+      <span>Tema: verde</span>
+    </footer>
+  </div>
+</body>
+</html>
 
