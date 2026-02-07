@@ -1,1 +1,469 @@
+<!--
+  Proiect: 25 Întrebări despre Inteligența Artificială
+  Fișier: index.html
+  Versiune: 1.0
+  Notă (managementul configurației): La fiecare modificare, crește versiunea (1.1, 1.2, ...).
+-->
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>25 Întrebări despre Inteligența Artificială</title>
+
+  <!-- Font "cunoscut": Inter (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /*
+      Tema: Verde (modernă, clară, ușor de citit pe GitHub Pages)
+      Construcție: carduri + accordion (details/summary)
+    */
+    :root{
+      --bg: #07140d;         /* fundal foarte închis, verde-negru */
+      --panel: #0c1f14;      /* panouri */
+      --panel2: #0f2a1a;     /* panouri hover */
+      --text: #e7fff0;       /* text principal */
+      --muted: #b7e7c6;      /* text secundar */
+      --border: rgba(140, 255, 192, 0.18);
+      --accent: #22c55e;     /* verde */
+      --accent2:#16a34a;     /* verde mai închis */
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 700px at 15% 0%, rgba(34,197,94,0.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,0.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), #040b07);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 16px 60px;
+    }
+
+    header{
+      border: 1px solid var(--border);
+      background: rgba(12,31,20,0.75);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(34,197,94,0.65);
+    }
+
+    h1{
+      margin: 10px 0 6px;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: -0.4px;
+    }
+
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .grid{
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .card{
+      border: 1px solid var(--border);
+      background: rgba(12,31,20,0.62);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .cardhead{
+      padding: 16px 16px 8px;
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .title{
+      margin:0;
+      font-size: 16px;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .badge{
+      font-size: 12px;
+      color: #05210f;
+      background: linear-gradient(180deg, #59f09a, #22c55e);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .content{
+      padding: 0 16px 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    details{
+      border-top: 1px solid rgba(140, 255, 192, 0.12);
+      background: rgba(15,42,26,0.35);
+    }
+
+    summary{
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--text);
+      outline: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .q{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+    }
+
+    .nr{
+      min-width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(34,197,94,0.16);
+      border: 1px solid rgba(34,197,94,0.35);
+      color: #bfffe0;
+      font-weight: 900;
+      box-shadow: 0 0 18px rgba(34,197,94,0.08) inset;
+    }
+
+    .chev{
+      width: 12px; height: 12px;
+      border-right: 2px solid rgba(183,231,198,0.9);
+      border-bottom: 2px solid rgba(183,231,198,0.9);
+      transform: rotate(45deg);
+      transition: transform .18s ease;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+
+    details[open] summary .chev{
+      transform: rotate(225deg);
+    }
+
+    .answerBox{
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hint{
+      margin: 0;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px dashed rgba(34,197,94,0.35);
+      background: rgba(34,197,94,0.08);
+      color: #d7ffe8;
+    }
+
+    footer{
+      margin-top: 18px;
+      color: rgba(183,231,198,0.85);
+      font-size: 12px;
+      text-align:center;
+    }
+
+    .sep{ opacity: 0.6; margin: 0 8px; }
+
+    @media (min-width: 860px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="kicker"><span class="dot"></span> Inteligență Artificială • Set de întrebări</div>
+      <h1>25 întrebări despre AI (pentru discuție și verificare)</h1>
+      <p class="sub">Deschide fiecare întrebare. Poți completa răspunsurile ca exercițiu (sunt intenționat fără soluții).</p>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Fundamente</p>
+          <span class="badge">Q1–Q9</span>
+        </div>
+        <div class="content">Concepte de bază: definiții, date, modele, evaluare.</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">1</div><div>Ce este inteligența artificială (AI) și cum diferă de programarea clasică?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Scrie în 2–4 idei: “reguli scrise de om” vs “model învățat din date”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">2</div><div>Ce înseamnă „machine learning” și de ce este considerat o subramură a AI?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Include ideea de „învățare din exemple” și „generalizare”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">3</div><div>Care este diferența dintre învățare supervizată, nesupervizată și prin întărire?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Compară: etichete, grupare/structură, recompensă.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">4</div><div>Ce sunt „datele de antrenare”, „datele de validare” și „datele de test” și de ce le separăm?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Menționează prevenirea supraînvățării (overfitting) și evaluarea corectă.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">5</div><div>Ce este o „caracteristică” (feature) într-un set de date și cum influențează performanța unui model?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Dă un exemplu: vârstă, temperatură, număr de clicuri etc.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">6</div><div>Ce înseamnă „overfitting” și „underfitting”? Dă câte un semn pentru fiecare.</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Leagă de: performanță bună pe train vs slabă pe test.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">7</div><div>Ce este o matrice de confuzie și la ce folosește în clasificare?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Amintește: true/false positives/negatives.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">8</div><div>Ce metrici sunt utile la clasificare (accuracy, precision, recall, F1) și când poate „accuracy” să fie înșelătoare?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Caz tipic: clase dezechilibrate (imbalance).</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">9</div><div>Ce este „bias” în date sau în model și de ce poate produce rezultate nedrepte?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Leagă de reprezentare insuficientă / eșantionare.</p></div>
+        </details>
+      </section>
+
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Modele & Tehnici</p>
+          <span class="badge">Q10–Q18</span>
+        </div>
+        <div class="content">Rețele neuronale, NLP, viziune, modele generative.</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">10</div><div>Ce este o rețea neuronală și ce înseamnă un „parametru” (weight) într-un astfel de model?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Descrie ideea de strat (layer) și ajustare prin învățare.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">11</div><div>Ce este funcția de activare și de ce nu este suficientă o rețea doar cu operații liniare?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Cuvânt-cheie: nelinearitate.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">12</div><div>Ce înseamnă „gradient descent” și care este rolul ratei de învățare (learning rate)?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Menționează: pași prea mari vs prea mici.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">13</div><div>Ce este un „transformer” (în NLP) și de ce a devenit atât de important?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Cuvânt-cheie: atenție (attention) și paralelizare.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">14</div><div>Ce sunt „tokenii” într-un model de limbaj și cum influențează costul/limitele de context?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Leagă de: împărțirea textului și fereastra de context.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">15</div><div>Ce înseamnă „fine-tuning” și când e preferabil față de „prompting”?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Compară: personalizare persistentă vs instrucțiuni în prompt.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">16</div><div>Ce este „RAG” (Retrieval-Augmented Generation) și ce problemă încearcă să reducă?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Cuvinte-cheie: căutare în documente + generare; halucinații.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">17</div><div>Care este diferența dintre un model discriminativ și unul generativ?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Discriminativ: decide/clasifică; Generativ: poate produce date similare.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">18</div><div>Ce este „difuzia” (diffusion) în generarea de imagini și ce rol au pașii iterativi?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Leagă de: zgomot → imagine prin denoising repetat.</p></div>
+        </details>
+      </section>
+
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Etică, Siguranță, Societate</p>
+          <span class="badge">Q19–Q25</span>
+        </div>
+        <div class="content">Impact, responsabilitate, confidențialitate, riscuri.</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">19</div><div>Ce este „explainability” (explicabilitatea) și de ce contează în domenii precum sănătate sau justiție?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Idee: decizii verificabile, încredere, audit.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">20</div><div>Ce riscuri apar când un model „halucinează” și cum poate fi redusă problema în practică?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Menționează: citare surse, RAG, verificare umană, constrângeri.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">21</div><div>Ce înseamnă „privacy” în AI și ce este diferența dintre anonimizare și pseudonimizare?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Fii concret: ce se poate reidentifica și ce nu.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">22</div><div>Ce este „data leakage” și de ce poate face un model să pară mai bun decât este?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Exemplu: informații din test ajung în train.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">23</div><div>Cum poate AI să amplifice dezinformarea și ce contramăsuri există?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Amintește: watermarking, verificare surse, educație media.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">24</div><div>Ce înseamnă „alignment” (alinierea) unui model și de ce e dificilă?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Idee: valori/obiective umane, interpretare, context.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">25</div><div>În ce domenii vezi cel mai mare impact pozitiv al AI în următorii 5 ani și care sunt două riscuri majore?</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answerBox"><p class="hint">Răspuns scurt: 3 domenii + 2 riscuri (ex.: piața muncii, confidențialitate).</p></div>
+        </details>
+      </section>
+    </div>
+
+    <footer>
+      <span>Versiune: <strong>1.0</strong></span>
+      <span class="sep">•</span>
+      <span>Fișier unic pentru GitHub Pages: <strong>index.html</strong></span>
+      <span class="sep">•</span>
+      <span>Tema: verde</span>
+    </footer>
+  </div>
+</body>
+</html>
 
