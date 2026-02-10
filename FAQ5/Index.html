@@ -1,1 +1,439 @@
+<!--
+  Proiect: FAQ – Programarea la copii
+  Material: C++ sau Python (5 argumente pro și contra)
+  Fișier: c-plus-plus-sau-python.html
+  Versiune: 1.0
+  Comentariu: HTML complet, tema verde, collapsible (details/summary). Stil identic cu modelul.
+-->
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C++ sau Python – 5 argumente pro și contra</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #06120b;
+      --text: #e9fff1;
+      --muted: rgba(233, 255, 241, 0.78);
+      --border: rgba(140, 255, 192, 0.18);
+      --accent: #22c55e;
+      --shadow: 0 12px 34px rgba(0,0,0,0.38);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.55;
+      background:
+        radial-gradient(1100px 680px at 15% 0%, rgba(34,197,94,0.18), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,0.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), #030805);
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 26px 16px 70px;
+    }
+
+    header{
+      border: 1px solid var(--border);
+      background: rgba(10,28,18,0.70);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(34,197,94,0.65);
+    }
+
+    h1{
+      margin: 10px 0 6px;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: -0.4px;
+    }
+
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .grid{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .card{
+      border: 1px solid var(--border);
+      background: rgba(10,28,18,0.62);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .cardhead{
+      padding: 16px 16px 8px;
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .title{
+      margin:0;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.1px;
+    }
+
+    .badge{
+      font-size: 12px;
+      color: #05210f;
+      background: linear-gradient(180deg, #59f09a, #22c55e);
+      border: 1px solid rgba(255,255,255,0.14);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .content{
+      padding: 0 16px 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    details{
+      border-top: 1px solid rgba(140, 255, 192, 0.12);
+      background: rgba(12,34,22,0.35);
+    }
+
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding: 14px 16px;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--text);
+      outline:none;
+      user-select:none;
+    }
+
+    summary::-webkit-details-marker{ display:none; }
+
+    .q{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      flex: 1 1 auto;
+    }
+
+    .nr{
+      min-width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(34,197,94,0.16);
+      border: 1px solid rgba(34,197,94,0.35);
+      color: #bfffe0;
+      font-weight: 900;
+      box-shadow: 0 0 18px rgba(34,197,94,0.08) inset;
+      margin-top: 1px;
+    }
+
+    .chev{
+      width: 12px; height: 12px;
+      border-right: 2px solid rgba(233,255,241,0.75);
+      border-bottom: 2px solid rgba(233,255,241,0.75);
+      transform: rotate(45deg);
+      transition: transform .18s ease;
+      margin-top: 7px;
+      flex: 0 0 auto;
+    }
+
+    details[open] summary .chev{
+      transform: rotate(225deg);
+    }
+
+    .answer{
+      padding: 0 16px 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .answer p{
+      margin: 0;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(34,197,94,0.22);
+      background: rgba(34,197,94,0.08);
+      color: rgba(233,255,241,0.92);
+    }
+
+    footer{
+      margin-top: 16px;
+      text-align:center;
+      font-size: 12px;
+      color: rgba(233,255,241,0.70);
+    }
+
+    .sep{ opacity:0.6; margin: 0 8px; }
+
+    @media (min-width: 860px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="kicker"><span class="dot"></span> Material • C++ sau Python</div>
+      <h1>C++ sau Python – 5 argumente pro și contra</h1>
+      <p class="sub">Apasă pe o întrebare pentru a vedea răspunsul. Accent educațional: 11–18 ani.</p>
+    </header>
+
+    <div class="grid">
+      <!-- CARD 1 -->
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Python – Avantaje (5)</p>
+          <span class="badge">1–5</span>
+        </div>
+        <div class="content">Python reduce barierele inițiale și susține proiecte STEM prin ecosistem. 🐍🔬</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">1</div><div>Reducerea încărcării cognitive inițiale 🧠</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Python are mai puține reguli formale la început. Elevul se poate concentra pe pașii logici (ce urmează, ce condiție se verifică, ce se repetă), nu pe detalii tehnice.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">2</div><div>Experimentare rapidă ⚡</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Elevul modifică, testează și observă imediat efectul. Această buclă rapidă „încerc–verific–corectez” sprijină învățarea prin explorare controlată.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">3</div><div>Adecvat pentru gândire algoritmică timpurie ✅</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Condiții și repetări se introduc fără mult formalism. Elevul învață structura: intrare → procesare → ieșire, plus verificări și repetiții, cu accent pe logică.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">4</div><div>Integrare ușoară cu STEM 🔬⚙️</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Python se leagă natural de matematică și științe: simulări, date, calcule, reprezentări. Proiectele pot fi interdisciplinare și relevante pentru 14–18 ani.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">5</div><div>Ecosistem mare: biblioteci + comunitate 🌍</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Există multe biblioteci și mulți programatori. Elevul găsește exemple, documentație și proiecte reale. Învață și ideea de reutilizare: folosești instrumente deja construite, nu reinventezi tot.</p></div>
+        </details>
+      </section>
+
+      <!-- CARD 2 -->
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">C++ – Avantaje (5)</p>
+          <span class="badge">6–10</span>
+        </div>
+        <div class="content">C++ dezvoltă rigoare, atenție la detalii și înțelegerea resurselor. ⚙️📌</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">6</div><div>Expune explicit structura programului 🧩</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>C++ forțează claritate: tipuri, declarații, structură. Elevul vede mai ușor legătura dintre idee și implementare și înțelege ce este permis și ce nu.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">7</div><div>Antrenează atenția la detaliu 🔍</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>O virgulă, un tip greșit, o conversie greșită – toate contează. Elevul învață disciplină: verifică, testează, corectează sistematic.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">8</div><div>Introduce corect noțiunea de resurse ⏱️🧠</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>C++ face vizibile idei esențiale: memorie, timp de execuție, costuri. Elevul începe să gândească nu doar „merge”, ci și „cât costă” și „cât de sigur e”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">9</div><div>Susține gândirea algoritmică riguroasă 📚</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Este foarte potrivit pentru algoritmi și structuri de date. Elevul poate construi o bază solidă pentru probleme clasice și pentru concursuri/olimpiade.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">10</div><div>Formează disciplină cognitivă 🎯</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>C++ obligă la planificare. Pentru 14–18 ani, asta este un avantaj: elevul învață să proiecteze înainte să scrie și să documenteze deciziile.</p></div>
+        </details>
+      </section>
+
+      <!-- CARD 3 -->
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">Python – Limitări (5)</p>
+          <span class="badge">11–15</span>
+        </div>
+        <div class="content">Python poate ascunde mecanisme și poate încuraja superficialitatea dacă nu este ghidat corect. ⚠️</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">11</div><div>Mecanisme „sub capotă” mai puțin vizibile 🧩</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Elevul poate să nu înțeleagă clar ce se întâmplă cu memoria și costul operațiilor. Fără ghidaj, rămâne doar nivelul „de suprafață”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">12</div><div>Rigoare mai mică în etapa inițială 📉</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Unele greșeli sunt tolerate mai ușor. Elevul poate amâna disciplina verificării și a structurii stricte dacă nu este antrenat explicit.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">13</div><div>Performanța devine secundară ⏱️</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Elevul poate ignora complexitatea și optimizarea. Pentru proiecte mai mari, apare surpriza: „merge, dar e lent”.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">14</div><div>Trecerea la limbaje stricte poate fi dificilă 🔁</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>După o perioadă exclusiv în Python, trecerea la reguli stricte (tipuri, compilare, erori de build) poate produce frustrare și necesită reeducare.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">15</div><div>Risc: „merge, deci e corect” ✅❌</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Fără cerințe clare de testare și explicație, elevul poate confunda funcționarea pe un caz cu corectitudinea generală.</p></div>
+        </details>
+      </section>
+
+      <!-- CARD 4 -->
+      <section class="card">
+        <div class="cardhead">
+          <p class="title">C++ – Limitări (5)</p>
+          <span class="badge">16–20</span>
+        </div>
+        <div class="content">C++ poate fi prea greu prea devreme și poate muta focusul pe formă, nu pe idee. ⚠️</div>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">16</div><div>Încărcare cognitivă mare la început 🧠⚠️</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Tipuri, compilare, erori multiple. Pentru 11–13 ani, poate fi prea mult simultan și poate bloca progresul pe logică.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">17</div><div>Feedback mai lent în faza inițială 🐢</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Elevul petrece timp pe erori de compilare și configurare. Dacă nu există suport, apare frustrarea.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">18</div><div>Explorare mai greoaie 🔧</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Nu încurajează încercări rapide în primele lecții. Pentru învățare prin experiment, poate fi un dezavantaj.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">19</div><div>Risc: focus pe formă, nu pe idee 🧾</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>Elevul poate ajunge să „scrie corect sintactic” fără să înțeleagă bine algoritmul. Necesită ghidaj didactic strict.</p></div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="q"><div class="nr">20</div><div>Necesită maturitate cognitivă 🎓</div></div>
+            <span class="chev" aria-hidden="true"></span>
+          </summary>
+          <div class="answer"><p>C++ este eficient când elevul poate planifica, testa și documenta. De aceea este mai potrivit pentru 14–18 ani decât pentru debut timpuriu.</p></div>
+        </details>
+      </section>
+    </div>
+
+    <footer>
+      <span>Versiune: <strong>1.0</strong></span>
+      <span class="sep">•</span>
+      <span>Fișier: <strong>c-plus-plus-sau-python.html</strong></span>
+      <span class="sep">•</span>
+      <span>Tema: verde</span>
+    </footer>
+  </div>
+</body>
+</html>
 
