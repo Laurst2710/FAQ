@@ -1,408 +1,98 @@
-<!--
-  Proiect: FAQ – Programarea la copii
-  Material: C++ sau Python (PRO/CONTRA + Recomandare)
-  Fișier: c-plus-plus-vs-python-cards.html
-  Versiune: 1.0
-  Comentariu: HTML complet, tema verde, collapsible (details/summary). CARD 1 = C++, CARD 2 = Python. Recomandarea sub carduri.
--->
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>C++ sau Python – PRO/CONTRA + Recomandare</title>
-
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg: #06120b;
-      --text: #e9fff1;
-      --muted: rgba(233, 255, 241, 0.78);
-      --border: rgba(140, 255, 192, 0.18);
-      --accent: #22c55e;
-      --shadow: 0 12px 34px rgba(0,0,0,0.38);
-      --radius: 18px;
-    }
-
-    *{ box-sizing: border-box; }
-
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      line-height: 1.55;
-      background:
-        radial-gradient(1100px 680px at 15% 0%, rgba(34,197,94,0.18), transparent 60%),
-        radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,0.12), transparent 55%),
-        linear-gradient(180deg, var(--bg), #030805);
-    }
-
-    .wrap{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 26px 16px 70px;
-    }
-
-    header{
-      border: 1px solid var(--border);
-      background: rgba(10,28,18,0.70);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px 18px;
-      backdrop-filter: blur(8px);
-    }
-
-    .kicker{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight: 800;
-      letter-spacing: 0.2px;
-      color: var(--muted);
-      font-size: 12px;
-      text-transform: uppercase;
-    }
-
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background: var(--accent);
-      box-shadow: 0 0 18px rgba(34,197,94,0.65);
-    }
-
-    h1{
-      margin: 10px 0 6px;
-      font-size: 30px;
-      line-height: 1.15;
-      letter-spacing: -0.4px;
-    }
-
-    .sub{
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .grid{
-      margin-top: 16px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-
-    .card{
-      border: 1px solid var(--border);
-      background: rgba(10,28,18,0.62);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .cardhead{
-      padding: 16px 16px 8px;
-      display:flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .title{
-      margin:0;
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: 0.1px;
-    }
-
-    .badge{
-      font-size: 12px;
-      color: #05210f;
-      background: linear-gradient(180deg, #59f09a, #22c55e);
-      border: 1px solid rgba(255,255,255,0.14);
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .content{
-      padding: 0 16px 14px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    details{
-      border-top: 1px solid rgba(140, 255, 192, 0.12);
-      background: rgba(12,34,22,0.35);
-    }
-
-    summary{
-      cursor:pointer;
-      list-style:none;
-      padding: 14px 16px;
-      display:flex;
-      align-items:flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      font-weight: 800;
-      color: var(--text);
-      outline:none;
-      user-select:none;
-    }
-
-    summary::-webkit-details-marker{ display:none; }
-
-    .q{
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
-      flex: 1 1 auto;
-    }
-
-    .nr{
-      min-width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: rgba(34,197,94,0.16);
-      border: 1px solid rgba(34,197,94,0.35);
-      color: #bfffe0;
-      font-weight: 900;
-      box-shadow: 0 0 18px rgba(34,197,94,0.08) inset;
-      margin-top: 1px;
-    }
-
-    .chev{
-      width: 12px; height: 12px;
-      border-right: 2px solid rgba(233,255,241,0.75);
-      border-bottom: 2px solid rgba(233,255,241,0.75);
-      transform: rotate(45deg);
-      transition: transform .18s ease;
-      margin-top: 7px;
-      flex: 0 0 auto;
-    }
-
-    details[open] summary .chev{
-      transform: rotate(225deg);
-    }
-
-    .answer{
-      padding: 0 16px 16px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .answer p{
-      margin: 0;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(34,197,94,0.22);
-      background: rgba(34,197,94,0.08);
-      color: rgba(233,255,241,0.92);
-    }
-
-    .recommend{
-      margin-top: 14px;
-      border: 1px solid var(--border);
-      background: rgba(10,28,18,0.70);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 16px 16px;
-    }
-
-    .recommend h2{
-      margin:0 0 8px;
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: 0.1px;
-    }
-
-    .recommend p{
-      margin: 0;
-      color: rgba(233,255,241,0.92);
-      font-size: 14px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(34,197,94,0.22);
-      background: rgba(34,197,94,0.08);
-    }
-
-    footer{
-      margin-top: 16px;
-      text-align:center;
-      font-size: 12px;
-      color: rgba(233,255,241,0.70);
-    }
-
-    .sep{ opacity:0.6; margin: 0 8px; }
-
-    @media (min-width: 860px){
-      .grid{ grid-template-columns: 1fr 1fr; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiză Python vs C++</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 1000px; margin: auto; padding: 20px; color: #333; }
+        h1, h2, h3 { color: #2c3e50; }
+        .section { margin-bottom: 40px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        .grid { display: flex; gap: 20px; }
+        .col { flex: 1; padding: 15px; border-radius: 5px; }
+        .pro-box { background-color: #e8f8f5; border-left: 5px solid #27ae60; }
+        .contra-box { background-color: #fdf2f2; border-left: 5px solid #e74c3c; }
+        .recomandare { background-color: #f4f7f6; padding: 20px; border-radius: 10px; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        strong { color: #2c3e50; }
+    </style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header>
-      <div class="kicker"><span class="dot"></span> Material • C++ vs Python</div>
-      <h1>C++ sau Python – PRO/CONTRA + Recomandare</h1>
-      <p class="sub">Apasă pe fiecare secțiune pentru detalii. Recomandarea este la final, sub carduri.</p>
-    </header>
 
-    <div class="grid">
-      <!-- CARD 1: C++ -->
-      <section class="card">
-        <div class="cardhead">
-          <p class="title">CARD 1 • C++ (Performanță și Structură)</p>
-          <span class="badge">C++</span>
+    <h1>Analiză Limbaje de Programare</h1>
+
+    <div class="section">
+        <h2>Python – PRO și CONTRA</h2>
+        <div class="grid">
+            <div class="col pro-box">
+                <h3>PRO (5)</h3>
+                <ul>
+                    <li>Python este potrivit ca limbaj de început deoarece permite introducerea programării ca exercițiu de gândire, nu ca exercițiu de memorare a regulilor, lucru esențial între 11 și 15 ani, când copilul își construiește structura logică de bază.</li>
+                    <li>Python pune accentul pe relația dintre problemă și soluție, ajutând elevul să înțeleagă clar ce date are, ce pași urmează și ce rezultat obține, fără a fi blocat de o sintaxă rigidă.</li>
+                    <li>Python facilitează legătura dintre programare și alte domenii, precum matematică, fizică sau științe, unde codul devine un instrument de explorare și înțelegere, nu un scop izolat.</li>
+                    <li>Python susține învățarea prin testare rapidă și ajustare, permițând copilului să observe direct efectul deciziilor sale, mecanism important pentru dezvoltarea gândirii critice.</li>
+                    <li>Python beneficiază de un ecosistem larg de biblioteci și o comunitate mare, ceea ce îi arată elevului că programarea modernă este colaborativă și construită pe reutilizarea soluțiilor existente.</li>
+                </ul>
+            </div>
+            <div class="col contra-box">
+                <h3>CONTRA (5)</h3>
+                <ul>
+                    <li>Python poate crea o relație superficială cu ideea de corectitudine, deoarece un program poate părea corect doar pentru că produce un rezultat, fără ca elevul să analizeze limitele soluției.</li>
+                    <li>Python ascunde multe detalii despre execuție și resurse, ceea ce poate întârzia formarea unei înțelegeri mature a performanței și eficienței.</li>
+                    <li>Python amână confruntarea cu rigoarea formală, care este inevitabilă în informatică avansată și trebuie introdusă ulterior în mod conștient.</li>
+                    <li>Python poate încuraja dependența de soluții deja existente, dacă nu este ghidat corect, slăbind capacitatea elevului de a construi soluții de la zero.</li>
+                    <li>Python nu este întotdeauna cel mai potrivit pentru gândire algoritmică profundă, atunci când obiectivul este control strict și performanță ridicată.</li>
+                </ul>
+            </div>
         </div>
-        <div class="content">16–18 ani: programare riguroasă, structură, pregătire academică/competițională. ⚙️</div>
-
-        <details open>
-          <summary>
-            <div class="q"><div class="nr">1</div><div>16–18 ani: C++ (Performanță și Structură)</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answer">
-            <p>Această etapă marchează trecerea către programarea de sistem și pregătirea pentru mediul academic sau competițional (Olimpiade, examene de specialitate).</p>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">2</div><div>De ce C++?</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answer">
-            <p>Oferă control total asupra resurselor hardware și a memoriei. Este limbajul standard în programa școlară de liceu din România.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">3</div><div>Concepte cheie</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answer">
-            <p>
-              Gestiunea memoriei (Pointeri și adrese).<br><br>
-              Algoritmica pură: Sortări complexe, căutări, recursivitate.<br><br>
-              Structuri de date avansate: Stive, cozi, grafuri și arbori.<br><br>
-              Programare Orientată pe Obiect (OOP): Clase, moștenire, polimorfism.
-            </p>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">4</div><div>Proiecte recomandate</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answer">
-            <p>Rezolvarea problemelor de logică pe platforme precum InfoArena sau PBInfo, dezvoltarea de aplicații care necesită procesare rapidă.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">5</div><div>PRO/CONTRA (scurt)</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answer">
-            <p>
-              PRO: rigoare, control, eficiență, algoritmică solidă.<br><br>
-              CONTRA: mai greu la început, progres vizibil mai lent, încărcare cognitivă ridicată dacă e introdus prea devreme.
-            </p>
-          </div>
-        </details>
-      </section>
-
-      <!-- CARD 2: PYTHON -->
-      <section class="card">
-        <div class="cardhead">
-          <p class="title">CARD 2 • Python (Limbajul de start)</p>
-          <span class="badge">PYTHON</span>
-        </div>
-        <div class="content">11–15 ani: rezultate imediate, concepte fundamentale, tranziție spre text. 🐍</div>
-
-        <details open>
-          <summary>
-            <div class="q"><div class="nr">1</div><div>Python – PRO (5)</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answer">
-            <p>
-              Python este potrivit ca limbaj de început deoarece permite introducerea programării ca exercițiu de gândire, nu ca exercițiu de memorare a regulilor, lucru esențial între 11 și 15 ani, când copilul își construiește structura logică de bază.<br><br>
-              Python pune accentul pe relația dintre problemă și soluție, ajutând elevul să înțeleagă clar ce date are, ce pași urmează și ce rezultat obține, fără a fi blocat de o sintaxă rigidă.
-            </p>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">2</div><div>11–15 ani: Python (Limbajul de Start)</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answer">
-            <p>La această vârstă, focusul este pe rezultate imediate și înțelegerea conceptelor fundamentale fără bariera unei sintaxe rigide.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">3</div><div>De ce Python?</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answer">
-            <p>Sintaxa este foarte apropiată de limba engleză, ceea ce reduce frustrarea începătorului.</p>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">4</div><div>Concepte cheie</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answer">
-            <p>
-              Variabile și tipuri de date simple.<br><br>
-              Structuri de control: if, for, while.<br><br>
-              Liste și dicționare (structuri de date de bază).<br><br>
-              Introducere în biblioteci grafice simple (ex: Turtle sau Pygame Zero).
-            </p>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="q"><div class="nr">5</div><div>Proiecte recomandate</div></div>
-            <span class="chev" aria-hidden="true"></span>
-          </summary>
-          <div class="answer">
-            <p>Dezvoltarea unor jocuri simple de tip text, calculatoare de medii școlare sau mici scripturi de automatizare.</p>
-          </div>
-        </details>
-      </section>
     </div>
 
-    <!-- Recomandare sub carduri -->
-    <section class="recommend">
-      <h2>Recomandare</h2>
-      <p><strong>11–15 ani: Python</strong><br><strong>16–18 ani: C++</strong></p>
-    </section>
+    <div class="section">
+        <h2>C++ – PRO și CONTRA</h2>
+        <div class="grid">
+            <div class="col pro-box">
+                <h3>PRO (5)</h3>
+                <ul>
+                    <li>C++ impune un mod de gândire riguros și explicit, în care fiecare element al programului trebuie înțeles și justificat, contribuind la formarea disciplinei intelectuale.</li>
+                    <li>C++ dezvoltă responsabilitatea față de erori, deoarece acestea trebuie identificate, înțelese și corectate explicit, nu evitate sau ignorate.</li>
+                    <li>C++ expune elevul la concepte fundamentale ale informaticii, precum reprezentarea datelor, memoria și eficiența, esențiale pentru o înțelegere profundă a domeniului.</li>
+                    <li>C++ este extrem de potrivit pentru algoritmi și structuri de date complexe, unde claritatea, precizia și controlul sunt obligatorii.</li>
+                    <li>C++ construiește una bază solidă și transferabilă, astfel încât alte limbaje pot fi învățate ulterior mai ușor și mai profund.</li>
+                </ul>
+            </div>
+            <div class="col contra-box">
+                <h3>CONTRA (5)</h3>
+                <ul>
+                    <li>C++ nu este potrivit pentru introducere timpurie, deoarece volumul de reguli și constrângeri poate bloca dezvoltarea logicii de bază.</li>
+                    <li>C++ oferă un progres vizibil mai lent la început, ceea ce poate afecta motivația elevului dacă nu există sprijin educațional adecvat.</li>
+                    <li>C++ poate supraîncărca cognitiv elevul, determinându-l să se concentreze pe formă și detalii tehnice, în detrimentul ideii algoritmice.</li>
+                    <li>C++ nu favorizează explorarea rapidă, fiind un limbaj al preciziei și planificării, nu al încercării spontane.</li>
+                    <li>C++ necesită maturitate intelectuală și răbdare, fiind eficient în special în etapele avansate ale formării.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-    <footer>
-      <span>Versiune: <strong>1.0</strong></span>
-      <span class="sep">•</span>
-      <span>Fișier: <strong>c-plus-plus-vs-python-cards.html</strong></span>
-      <span class="sep">•</span>
-      <span>Tema: verde</span>
-    </footer>
-  </div>
+    <div class="recomandare">
+        <h2>Recomandare</h2>
+        
+        <h3>11–15 ani: Python (Limbajul de Start)</h3>
+        <p>La această vârstă, focusul este pe rezultate imediate și înțelegerea conceptelor fundamentale fără bariera unei sintaxe rugide.</p>
+        <ul>
+            <li><strong>De ce Python?</strong> Sintaxa este foarte apropiată de limba engleză, ceea ce reduce frustrarea începătorului.</li>
+            <li><strong>Concepte cheie:</strong> Variabile și tipuri de date simple; Structuri de control: if, for, while; Liste și dicționare; Introducere în biblioteci grafice (Turtle, Pygame Zero).</li>
+            <li><strong>Proiecte recomandate:</strong> Jocuri simple de tip text, calculatoare de medii școlare sau mici scripturi de automatizare.</li>
+        </ul>
+
+        <h3>16–18 ani: C++ (Performanță și Structură)</h3>
+        <p>Această etapă marchează trecerea către programarea de sistem și pregătirea pentru mediul academic sau competițional.</p>
+        <ul>
+            <li><strong>De ce C++?</strong> Oferă control total asupra resurselor hardware și a memoriei. Este limbajul standard în programa școlară de liceu din România.</li>
+            <li><strong>Concepte cheie:</strong> Gestiunea memoriei (Pointeri și adrese); Algoritmica pură: Sortări complexe, căutări, recursivitate; Structuri de date avansate; Programare Orientată pe Obiect (OOP).</li>
+            <li><strong>Proiecte recomandate:</strong> Rezolvarea problemelor de logică pe platforme precum InfoArena sau PBInfo, dezvoltarea de aplicații care necesită procesare rapidă.</li>
+        </ul>
+    </div>
+
 </body>
 </html>
